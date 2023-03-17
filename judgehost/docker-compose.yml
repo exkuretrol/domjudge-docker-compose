@@ -1,0 +1,25 @@
+services:
+  judgehost-1:
+    image: domjudge/judgehost:8.1.3
+    container_name: judgehost-1
+    # 需要設定 hostname 不然每次重新啟動都會不一樣...
+    hostname: judgehost-1
+    privileged: true
+    env_file:
+      - judgehost.env
+    environment:
+      - DAEMON_ID=0
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+
+  judgehost-2:
+    image: domjudge/judgehost:8.1.3
+    container_name: judgehost-2
+    hostname: judgehost-2
+    privileged: true
+    env_file:
+      - judgehost.env
+    environment:
+      - DAEMON_ID=1
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
